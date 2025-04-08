@@ -1,8 +1,8 @@
 
 function player_update()
     --physics
-   -- player.dy+=gravity
-   -- player.dx*=friction
+    player.dy+=gravity
+   player.dx*=friction
   
     --controls
     if btn(⬅️) then
@@ -27,7 +27,7 @@ function player_update()
     end
   
     --jump
-    if btnp(❎)
+    if btnp(⬆️)
     and player.landed then
       player.dy-=player.boost
       player.landed=false
@@ -94,26 +94,26 @@ function player_update()
   
   function player_animate()
     if player.jumping then
-     -- player.sp=7
+     player.sp=7
     elseif player.falling then
-     -- player.sp=8
+     player.sp=9
     elseif player.sliding then
-     -- player.sp=9
+     player.sp=11
     elseif player.running then
       if time()-player.anim>.1 then
         player.anim=time()
-     --   player.sp+=1
-      --  if player.sp>6 then
-      --    player.sp=3
-      --  end
+        player.sp+=2
+      if player.sp>6 then
+         player.sp=3
+        end
       end
     else --player idle
       if time()-player.anim>.3 then
         player.anim=time()
-        player.sp+=1
-      --  if player.sp>2 then
-      --    player.sp=1
-      -- end
+        player.sp+=2
+       if player.sp>3 then
+         player.sp=1
+       end
       end
     end
   end

@@ -4,8 +4,8 @@ function _init()
       sp=1,
       x=59,
       y=59,
-      w=8,
-      h=8,
+      w=16,
+      h=16,
       flp=false,
       dx=0,
       dy=0,
@@ -53,4 +53,8 @@ function _init()
     cls()
     map(0,0)
     spr(player.sp,player.x,player.y,2,2,player.flp)
+
+
   end
+
+  
