@@ -39,6 +39,7 @@ function _init()
     player_animate()
   
     --simple camera
+    cam_y=player.y-59
     cam_x=player.x-64+(player.w/2)
     if cam_x<map_start then
        cam_x=map_start
@@ -46,7 +47,7 @@ function _init()
     if cam_x>map_end-128 then
        cam_x=map_end-128
     end
-    camera(cam_x,0)
+    camera(cam_x,cam_y)
   end
   
   function _draw()
