@@ -12,7 +12,7 @@ function _init()
       max_dx=2,
       max_dy=3,
       acc=0.5,
-      boost=4,
+      boost=10,
       anim=0,
       running=false,
       jumping=false,
@@ -33,6 +33,8 @@ function _init()
   end
   -->8
   --update and draw
+
+  --function make_enemy(params)
   
   function _update()
     player_update()

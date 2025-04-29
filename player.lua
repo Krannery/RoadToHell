@@ -27,7 +27,7 @@ function player_update()
     end
   
     --jump
-    if btnp(⬆️)
+    if btnp(⬆️) 
     and player.landed then
       player.dy-=player.boost
       player.landed=false
