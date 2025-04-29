@@ -1,9 +1,16 @@
 
 function player_update()
-    --physics
-    player.dy+=gravity
-   player.dx*=friction
-  
+    -- pick the right gravity
+      g = gravity
+    -- gravity for when ghosted
+    if ghost_time and time() <= ghost_time then
+      g = ghost_gravity
+    end
+
+    -- apply gravity
+    player.dy = player.dy + g
+    player.dx = player.dx * friction
+
     --controls
     if btn(⬅️) then
       player.dx-=player.acc
@@ -31,6 +38,30 @@ function player_update()
     and player.landed then
       player.dy-=player.boost
       player.landed=false
+    end
+
+    --fart
+    if btnp(❎) 
+    and player.landed
+    and not player.running 
+    and not player.sliding then
+      player.sp=13  
+      sfx(1)
+    end
+
+    --air fart
+    if btnp(❎)
+      and player.jumping then 
+        player.dy-=player.fart_boost
+        sfx(1)
+        player.fart_time = time()
+    end
+
+    --air fart but when falling
+    if btnp(❎) 
+    and player.falling then
+      player.dy-=player.fart_boost_falling
+      sfx(1)
     end
   
     --check collision up and down
@@ -92,32 +123,3 @@ function player_update()
     end
   end
   
-  function player_animate()
-    if player.jumping then
-     player.sp=7
-    elseif player.falling then
-     player.sp=9
-    elseif player.sliding then
-     player.sp=11
-    elseif player.running then
-      if time()-player.anim>.1 then
-        player.anim=time()
-        player.sp+=2
-      if player.sp>6 then
-         player.sp=3
-        end
-      end
-    else --player idle
-      if time()-player.anim>.3 then
-        player.anim=time()
-        player.sp+=2
-       if player.sp>3 then
-         player.sp=1
-       end
-      end
-    end
-  end
-  
-  function limit_speed(num,maximum)
-    return mid(-maximum,num,maximum)
-  end

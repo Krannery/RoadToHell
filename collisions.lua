@@ -1,13 +1,9 @@
--- global toggle for collision
+        -- global toggle for collision
 collision_enabled = true
+ghost_time   = nil 
 
 function collide_map(obj, aim, flag)
 
-    if btnp(❎) then
-        collision_enabled = not collision_enabled
-    end
-
- 
     if not collision_enabled then
         return false
     end
