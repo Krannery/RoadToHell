@@ -1,5 +1,6 @@
-    --player
+    
 function _init()
+
     player={
       sp=1,
       x=16,
@@ -50,6 +51,9 @@ function _init()
     map_start=0
     map_end=1024
   end
+
+   --music
+  music(2)
 
   local SPR_GHOST = 41 -- ghost sprite for when little guy gets hit by big angry demon
   normal_icon = 37

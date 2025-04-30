@@ -1,4 +1,5 @@
 function _update()
+  
   --physics & animation
   player_update()
   player_animate()
@@ -8,14 +9,14 @@ function _update()
     player.sp = SPR_GHOST
   end
 
-  --expire ghost mode **before** we check collisions
+  --expire ghost mode before we check collisions
   if ghost_time and time() > ghost_time then
     collision_enabled = true
     ghost_time   = nil
     if player._prev_sp then
       player.sp       = player._prev_sp
       player._prev_sp = nil
-      ui_sprite       = normal_icon
+      ui_icon      = normal_icon
     end
   end
 
@@ -43,6 +44,5 @@ function _update()
   camera(cam_x, cam_y)
 end
 
-  --music
-  music(1)
+
     

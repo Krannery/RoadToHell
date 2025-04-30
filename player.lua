@@ -1,5 +1,6 @@
 
 function player_update()
+  
     -- pick the right gravity
       g = gravity
     -- gravity for when ghosted

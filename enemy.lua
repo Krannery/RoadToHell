@@ -2,13 +2,13 @@
 
 function make_enemy(params)
     local e = {
-        x            = 160,
-        y            = 400,
-        w            = 16,
-        h            = 16,
-        dx           = 1,                    -- patrol speed
-        _start_x     = nil,                  -- for patrol
-        range        = 40,   -- how far to roam
+        x = 160,
+        y = 400,
+        w = 16,
+        h = 16,
+        dx = 1,                              -- patrol speed
+        _start_x = nil,                      -- for patrol
+        range        = 40,                   -- how far to roam
         walk_frames  = {33, 35},             -- sprite indices for walking right
         update       = enemy_update,
     }

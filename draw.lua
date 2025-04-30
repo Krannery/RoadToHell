@@ -1,4 +1,4 @@
-    --draw
+
 function _draw()
     cls(1)
 
@@ -8,7 +8,10 @@ function _draw()
 
     map(0,0)
     spr(player.sp,player.x,player.y,2,2,player.flp)
-    spr(43,360, 80 ,2 ,2)
+    
+    --princess
+    spr(43,369, 104,2 ,2)
+
 
     --draw enemies sprite
     for e in all(enemies)do

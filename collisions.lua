@@ -1,4 +1,5 @@
         -- global toggle for collision
+        
 collision_enabled = true
 ghost_time   = nil 
 
