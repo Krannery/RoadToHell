@@ -1,6 +1,4 @@
-    
 function _init()
-
     player={
       sp=1,
       x=16,
@@ -21,9 +19,11 @@ function _init()
       jumping=false,
       falling=false,
       sliding=false,
-      landed=false
+      landed=false,
+      -- fart cooldown properties
+      fart_cooldown=1,       -- seconds between boosts
+      last_fart_time=-0.5      -- init so boost ready immediately
     }
-  
 
     --vars
     gravity = 0.4
@@ -33,43 +33,43 @@ function _init()
     collision_enabled = true
     ghost_time   = nil
 
-
     --enemy array and calling the function
     enemies = {}
     make_enemy()
     make_enemy({  
-    x=240,
-    y=400,
-    dx=4
+      x=240,
+      y=400,
+      dx=4
     })
     
-  
     --simple camera
     cam_x=0
   
     --map limits
     map_start=0
     map_end=1024
-  end
 
-   --music
-  music(2)
+    -- win/lose flags
+    victory = false
+    defeat = false
+end
 
-  local SPR_GHOST = 41 -- ghost sprite for when little guy gets hit by big angry demon
-  normal_icon = 37
-  ghost_icon  = 39
-  ui_icon = normal_icon
+--music
+music(2)
 
-  function player_ghost()
+local SPR_GHOST = 41 -- ghost sprite for when little guy gets hit by big angry demon
+normal_icon = 37
+ghost_icon  = 39
+ui_icon = normal_icon
+
+function player_ghost()
     collision_enabled = false
-    ghost_time = time() + 0.5 --timer for ghosting
-    --ghost icon 
+    ghost_time = time() + 0.5 -- timer for ghosting
+    -- ghost icon 
     ui_icon = ghost_icon
-    sfx(3)
+    sfx(4)
 
-    --rember the prev sprite and change it to ghost sprite
+    -- remember prev sprite and set ghost
     player._prev_sp = player.sp
     player.sp = SPR_GHOST
-
-
-  end
+end

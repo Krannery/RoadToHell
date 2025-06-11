@@ -1,5 +1,23 @@
 function _update()
   
+  -- freeze everything once we’ve won
+  if victory then
+    -- let player restart
+    if btnp(❎) then
+      _init()
+      music(2)   -- back to your normal level track
+    end
+    return
+  end
+
+  if defeat then
+    if btnp(❎) then
+      _init()
+      music(2)  -- back to normal track
+    end
+    return
+  end
+
   --physics & animation
   player_update()
   player_animate()
@@ -38,6 +56,25 @@ function _update()
     end
   end
 
+  -- check for reaching the princess
+  if not victory
+    and player.x   < 369+16
+    and player.x+player.w > 369
+    and player.y   < 104+16
+    and player.y+player.h > 104 then
+
+    victory = true
+    music(3)   -- play your victory soundtrack
+  end
+
+  -- check for falling off the map
+  if not defeat
+    and player.y > 640 then     -- 64px is where the abyss starts
+    defeat = true
+    music(-1)
+    sfx(5)                    -- your “loss” tune
+  end
+  
   --camera…
   cam_y = player.y - 59
   cam_x = mid(map_start, player.x-64+(player.w/2), map_end-128)
