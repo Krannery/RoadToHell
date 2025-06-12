@@ -13,6 +13,7 @@ function _update()
   if defeat then
     if btnp(❎) then
       _init()
+      _draw()
       music(2)  -- back to normal track
     end
     return
@@ -76,9 +77,31 @@ function _update()
   end
   
   --camera…
-  cam_y = player.y - 59
-  cam_x = mid(map_start, player.x-64+(player.w/2), map_end-128)
+  cam_y = mid(
+    map_y_start,
+    player.y - 59,
+    map_y_end - 120   -- screen height is 128px
+  )
+  cam_x = mid(
+    map_start,
+    player.x - 64 + (player.w/2),
+    map_end - 128
+  )
   camera(cam_x, cam_y)
+
+  --- apple collection (apple is now 8×8)
+  for i=#apples,1,-1 do
+  local a = apples[i]
+  if rect_overlap(
+          player.x, player.y, player.w, player.h,  -- ✅ use the player’s full 16×16 box
+          a.x,      a.y,      8,       8           -- apple bounds
+        ) then
+      del(apples, a)
+      game.apples += 1
+      sfx(6)
+    end
+  end
+
 end
 
 

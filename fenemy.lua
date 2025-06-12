@@ -1,6 +1,6 @@
 -- enemy.lua
 
-function make_enemy(params)
+function make_fenemy(params)
     local e = {
         x = 160,
         y = 400,
@@ -9,7 +9,7 @@ function make_enemy(params)
         dx = 1,                              -- patrol speed
         _start_x = nil,                      -- for patrol
         range        = 40,                   -- how far to roam
-        walk_frames  = {33, 35},             -- sprite indices for walking right
+        walk_frames  = {72, 104},            -- sprite indices for walking right
         update       = enemy_update,
     }
     for k,v in pairs(params or {}) do e[k]=v end
@@ -17,7 +17,7 @@ function make_enemy(params)
     return e
 end
 
-function fenemy_update(self)
+function enemy_update(self)
 
     -- initialise patrol
     if not self._start_x then

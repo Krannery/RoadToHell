@@ -11,8 +11,13 @@ function _draw()
 
     if victory then
             rectfill(0,0,128,128,0)
-            print_centered("VICTORY!",64, 48, 7)
-            print_centered("press ❎ to play again", 64, 64, 6)
+            -- <-- this is where you pick the message
+            if game.apples >= game.apple_goal then
+                print_centered("THESE APPLES TASTE AMAIZING",64,48,11)
+            else
+                print_centered("WHERE ARE MY APPLES?",64,48, 8)
+            end
+            print_centered("press ❎ to play again",64,64,7)
         return
     end
 
@@ -30,9 +35,26 @@ function _draw()
     spr(43, 369, 104, 2, 2) -- princess
     for e in all(enemies) do spr(e.sp, e.x, e.y, 2, 2, e.flip) end
 
+    for a in all(apples) do
+        spr(SPR_APPLE, a.x, a.y)
+    end
+
     -- UI draw
     camera(0,0)
     spr(ui_icon, 4, 4, 2, 2)
+
+    -- draw apple counter at top-right with 16×16 icon
+    local txt = game.apples.."/"..game.apple_goal
+    local text_width = #txt * 4  -- each character is 4px wide
+    local icon_w = 12             -- 1×1 sprite is 8px
+    local padding = 2
+    local x_txt = 128 - text_width - icon_w - padding
+
+    -- counter
+    print(txt, x_txt, 10, 7)
+    -- icon, moved down 4 pixels
+    local icon_y = 8
+    spr(SPR_APPLE, 128 - icon_w, icon_y)
 
     -- fart cooldown meter 
     local meter_x, meter_y = 24, 10
@@ -41,6 +63,8 @@ function _draw()
     local fill = flr(mid(0, (cd / player.fart_cooldown) * meter_w, meter_w))
     rect(meter_x-1, meter_y-1, meter_x+meter_w+1, meter_y+meter_h+1, 7)
     rectfill(meter_x, meter_y, meter_x + fill, meter_y + meter_h, 3)
+
+
 end
 
 function player_animate()
