@@ -1,0 +1,18 @@
+# adapted from https://cs.anu.edu.au/courses/comp1720/resources/faq/#statement-of-originality
+
+name: Bobouțanu Cristian
+
+declaration: >-
+  I declare that everything I have submitted in this assignment is entirely my
+  own work, with the following exceptions:
+
+code: partile.lua
+  - comment: Entirely made with CHATGPT
+    url:
+    licence:
+
+code: collisions.lua/player.lua/game.lua/draw.lua
+  - comment: Used the NerdyTeachers tutorial template.
+    url:
+    licence:
+    
