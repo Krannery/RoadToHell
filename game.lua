@@ -1,6 +1,11 @@
-local SPR_APPLE = 74   -- choose an unused sprite index
+local SPR_APPLE = 74  
+shake_time      = 0
+shake_duration  = 0.3
+shake_magnitude = 5
+
 
 function _init()
+    particles_init()
     player={
       sp=1,
       x=16,
@@ -30,7 +35,7 @@ function _init()
     game.apples = 0
     game.apple_goal = 3
 
-    --vars
+--vars
     gravity = 0.4
     ghost_gravity = 2
     friction = 0.85
@@ -38,7 +43,7 @@ function _init()
     collision_enabled = true
     ghost_time   = nil
 
-    --enemy a
+--enemyies
     enemies = {}
     make_enemy(
       {  
@@ -64,7 +69,7 @@ function _init()
       dx=2,
       range=80,})
 
-    fenemies = {}
+--flying enemies   
     make_fenemy({  
       x=344,
       y=280,
@@ -83,17 +88,16 @@ function _init()
       dx=3,
       range=80,})
 
-    
-  -- simple camera
+-- simple camera
     cam_x = 0
 
-  -- horizontal map limits
+-- horizontal map limits
     map_start = 0
     map_end   = 1024
 
-  -- vertical map limits 
+-- vertical map limits 
     map_y_start = 0
-    map_y_end   = 512   --
+    map_y_end   = 512  
 
     -- win/lose flags
     victory = false
@@ -121,13 +125,21 @@ ghost_icon  = 39
 ui_icon = normal_icon
 
 function player_ghost()
+    local cx = player.x + player.w/2
+    local cy = player.y + player.h/2
+
+    spawn_hit(cx, cy)
+
     collision_enabled = false
-    ghost_time = time() + 0.5 -- timer for ghosting
+    ghost_time = time() + 0.5           
+    shake_time = time() + shake_duration 
+
     -- ghost icon 
     ui_icon = ghost_icon
     sfx(4)
 
     -- remember prev sprite and set ghost
     player._prev_sp = player.sp
-    player.sp = SPR_GHOST
+    player.sp       = SPR_GHOST
+    
 end

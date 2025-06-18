@@ -6,16 +6,14 @@ end
 
 function _draw()
     cls(1)
-    -- reset to screen‐space so prints land on the HUD, not in world space
     camera(0,0)
 
     if victory then
             rectfill(0,0,128,128,0)
-            -- <-- this is where you pick the message
             if game.apples >= game.apple_goal then
-                print_centered("THESE APPLES TASTE AMAIZING",64,48,11)
+                print_centered("WHY DID U EAT SO MANY BEANS?",64,48,11)
             else
-                print_centered("WHERE ARE MY APPLES?",64,48, 8)
+                print_centered("DID YOU NOT EAT YOURS BEANS?",64,48, 8)
             end
             print_centered("press ❎ to play again",64,64,7)
         return
@@ -31,6 +29,7 @@ function _draw()
     -- world draw
     camera(cam_x, cam_y)
     map(0,0)
+    particles_draw()
     spr(player.sp, player.x, player.y, 2, 2, player.flp)
     spr(43, 369, 104, 2, 2) -- princess
     for e in all(enemies) do spr(e.sp, e.x, e.y, 2, 2, e.flip) end
@@ -43,16 +42,15 @@ function _draw()
     camera(0,0)
     spr(ui_icon, 4, 4, 2, 2)
 
-    -- draw apple counter at top-right with 16×16 icon
+    -- draw apple counter at top-right
     local txt = game.apples.."/"..game.apple_goal
-    local text_width = #txt * 4  -- each character is 4px wide
-    local icon_w = 12             -- 1×1 sprite is 8px
+    local text_width = #txt * 4 
+    local icon_w = 12           
     local padding = 2
     local x_txt = 128 - text_width - icon_w - padding
 
     -- counter
     print(txt, x_txt, 10, 7)
-    -- icon, moved down 4 pixels
     local icon_y = 8
     spr(SPR_APPLE, 128 - icon_w, icon_y)
 
@@ -69,10 +67,8 @@ end
 
 function player_animate()
     if player.jumping then
-        -- only show the fart sprite in the frame immediately after a boost
         player.sp = (time() - player.last_fart_time < 0.05) and 45 or 9
     elseif player.falling then
-        -- same for falling boosts
         player.sp = (time() - player.last_fart_time < 0.05) and 45 or 9
     elseif player.sliding then
         player.sp = 11

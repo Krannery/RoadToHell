@@ -1,11 +1,13 @@
 function _update()
-  
+    
+  particles_update()
+
   -- freeze everything once we’ve won
   if victory then
     -- let player restart
     if btnp(❎) then
       _init()
-      music(2)   -- back to your normal level track
+      music(2) 
     end
     return
   end
@@ -14,7 +16,7 @@ function _update()
     if btnp(❎) then
       _init()
       _draw()
-      music(2)  -- back to normal track
+      music(2)
     end
     return
   end
@@ -65,36 +67,48 @@ function _update()
     and player.y+player.h > 104 then
 
     victory = true
-    music(3)   -- play your victory soundtrack
+    music(3)
+
   end
 
   -- check for falling off the map
   if not defeat
-    and player.y > 640 then     -- 64px is where the abyss starts
+    and player.y > 640 then --where the abyss starts
     defeat = true
     music(-1)
-    sfx(5)                    -- your “loss” tune
+    sfx(5)           
   end
   
-  --camera…
-  cam_y = mid(
+  -- compute the normal camera position
+  local base_y = mid(
     map_y_start,
     player.y - 59,
-    map_y_end - 120   -- screen height is 128px
+    map_y_end - 120
   )
-  cam_x = mid(
+  local base_x = mid(
     map_start,
     player.x - 64 + (player.w/2),
     map_end - 128
   )
+
+  -- if we’re in shake time, add a small random offset
+  if time() < shake_time then
+    local s = shake_magnitude
+    cam_x = base_x + (rnd(s*2) - s)
+    cam_y = base_y + (rnd(s*2) - s)
+  else
+    cam_x = base_x
+    cam_y = base_y
+  end
+
   camera(cam_x, cam_y)
 
-  --- apple collection (apple is now 8×8)
+  --- apple collection
   for i=#apples,1,-1 do
   local a = apples[i]
   if rect_overlap(
-          player.x, player.y, player.w, player.h,  -- ✅ use the player’s full 16×16 box
-          a.x,      a.y,      8,       8           -- apple bounds
+          player.x, player.y, player.w, player.h,
+          a.x,      a.y,      8,       8           
         ) then
       del(apples, a)
       game.apples += 1

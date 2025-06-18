@@ -38,6 +38,7 @@ function player_update()
       and not player.sliding then
       player.sp = 13
       sfx(1)
+      spawn_fart()
     end
 
     -- air fart with cooldown
@@ -46,6 +47,7 @@ function player_update()
         player.dy -= player.fart_boost
         sfx(1)
         player.last_fart_time = time()
+        spawn_fart(-4, -6)
     end
 
     -- falling fart with cooldown
@@ -54,6 +56,7 @@ function player_update()
         player.dy -= player.fart_boost_falling
         sfx(1)
         player.last_fart_time = time()
+        spawn_fart(-4, -6)
     end
 
     -- vertical collisions

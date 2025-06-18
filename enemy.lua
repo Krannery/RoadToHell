@@ -6,10 +6,10 @@ function make_enemy(params)
         y = 400,
         w = 16,
         h = 16,
-        dx = 1,                              -- patrol speed
-        _start_x = nil,                      -- for patrol
-        range        = 40,                   -- how far to roam
-        walk_frames  = {33, 35},             -- sprite indices for walking right
+        dx = 1,                              
+        _start_x = nil,                     
+        range        = 40,                 
+        walk_frames  = {33, 35},          
         update       = enemy_update,
     }
     for k,v in pairs(params or {}) do e[k]=v end

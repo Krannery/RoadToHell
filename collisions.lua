@@ -1,4 +1,4 @@
-        -- global toggle for collision
+-- global toggle for collision
 -- AABB overlap test
 function rect_overlap(x1,y1,w1,h1, x2,y2,w2,h2)
     return
