@@ -22,9 +22,8 @@ function _init()
       falling=false,
       sliding=false,
       landed=false,
-      -- fart cooldown properties
-      fart_cooldown=1,       -- seconds between boosts
-      last_fart_time=-0.5      -- init so boost ready immediately
+      fart_cooldown=1,       
+      last_fart_time=-0.5      
     }
     
     game = {}
@@ -55,24 +54,46 @@ function _init()
       y=312,
       dx=2,})
 
+      make_enemy({  
+      x=880,
+      y=232,})
+
+      make_enemy({  
+      x=760,
+      y=232,
+      dx=2,
+      range=80,})
+
     fenemies = {}
     make_fenemy({  
-      x=440,
+      x=344,
       y=280,
       dx=2,
+      range=80,})
+
+      make_fenemy({  
+      x=80,
+      y=360,
+      dx=2,
+      range=60,})
+
+      make_fenemy({  
+      x=576,
+      y=200,
+      dx=3,
       range=80,})
 
     
   -- simple camera
     cam_x = 0
 
-  -- horizontal map limits (in pixels)
+  -- horizontal map limits
     map_start = 0
     map_end   = 1024
 
-  -- vertical map limits (in pixels)
+  -- vertical map limits 
     map_y_start = 0
-    map_y_end   = 512   -- e.g. 64 tiles × 8px
+    map_y_end   = 512   --
 
     -- win/lose flags
     victory = false
